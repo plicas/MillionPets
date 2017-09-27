@@ -1,0 +1,30 @@
+<ion-view view-title="Pets">
+  <ion-header-bar class="bar bar-subheader item-input-inset search-reconhecimento">
+    <label class="item-input-wrapper search">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input placeholder="Pesquisar..." ng-change="searchPet(keyword)" type="text" ng-model="keyword" ng-model-options="{debounce: 800}">
+    </label>
+  </ion-header-bar>
+  <ion-content class="padding" ng-init="initPets()">
+    <h2>for 1 dollar stuff</h2>
+    <div class="clear"></div>
+    <!-- ng repeat here -->
+
+    <!-- pull to refresh -->
+    <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+    <ion-list>
+      <ion-item class="item item-reconhecimento-no-result" ng-if="items.length == 0">
+        Não existem resultados.
+      </ion-item>
+    </ion-list>
+    <ion-list  class="list">
+      <a ng-repeat="pet in items" class="item item-thumbnail-left item-trns" href="#/tab/pet/{{pet.id}}">
+        <img ng-src="http://staging.4paws.pt{{pet.picture}}">
+        <h2>{{pet.name}}</h2>
+      </a>
+      <ion-infinite-scroll on-infinite="loadPets(keyword)" distance="1%"></ion-infinite-scroll>
+
+    </ion-list>
+
+  </ion-content>
+</ion-view>

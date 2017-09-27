@@ -1,0 +1,65 @@
+<ion-view view-title="{{pet.name}}">
+  <ion-content has-tabs="true"  ng-controller="DashCtrl">
+
+    <div ng-if="pet.payed == 1">
+
+      <img class="full-image" src="http://staging.4paws.pt{{pet.picture}}">
+      <div class="list card">
+
+        <div class="item">
+          <center><h2>{{pet.name}}</h2></center>
+        </div>
+
+        <div class="item item-body">
+
+          <h3>About</h3>
+          <p ng-bind-html="pet.description"></p>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+<form name="myForm" novalidate>
+    <!-- if we don't have yet stuff -->
+    <div class="list list-inset" ng-if="pet.payed == 0 || pet.payed == null">
+      For just 1 dollar, place your pet in history and help all the pet comunity
+
+
+      <label class="item item-input">
+          <input type="text" placeholder="Your Name" ng-model="pet.owner_name" required>
+      </label>
+
+      <label class="item item-input">
+          <input type="text" placeholder="Your petname" ng-model="pet.name" required>
+      </label>
+      <input type="hidden" ng-model="pet.id" value="{{pet.id}}">
+      <label class="item item-input">
+        <textarea ng-model="pet.description" placeholder="Describe your pet"></textarea>
+      </label>
+
+      <!-- photo -->
+      <center>
+      <button class="button button-energized" ng-click="getCamera()">
+         Camera
+      </button>
+      &nbsp;
+      <button class="button button-energized" ng-click="getGallery()">
+         Gallery
+      </button>
+      <div class="row" style="border-bottom: 1px solid margin-bottom:1px;padding-bottom: 15px;" ng-show="showImage == 1">
+      <img ng-model="formData.picture1" id="lostDogImage" data-ng-src="{{data.imgUrl}}" style="max-width:100%; max-height:250px;margin:auto;" />
+      </div>
+      </center>
+      <button class="button button-full button-positive" ng-disabled="myForm.$invalid" ng-click="submit(pet)">
+        Go
+      </button>
+      </form>
+    </div>
+
+
+
+  </ion-content>
+</ion-view>
